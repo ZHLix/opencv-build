@@ -2,7 +2,7 @@
  * Config file for API Extractor.  For more info, please visit: https://api-extractor.com
  */
 {
-  "mainEntryPointFilePath": "<projectFolder>/types/index.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/types/src/index.d.ts",
 
   "apiReport": {
     "enabled": false

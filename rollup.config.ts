@@ -5,6 +5,7 @@ import { terser } from 'rollup-plugin-terser'
 
 export default defineConfig({
   input: {
+    OpenCVBuilder: 'src/OpenCVBuilder.ts',
     index: 'src/index.ts',
     bin: 'src/bin.ts',
   },

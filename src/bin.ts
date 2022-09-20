@@ -1,3 +1,3 @@
-import { install } from '.'
+import OpenCVBuilder from './OpenCVBuilder'
 
-install()
+void new OpenCVBuilder(process.argv).install()
