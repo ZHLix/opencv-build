@@ -28,9 +28,10 @@ export function numberOfCoresAvailable() {
   return cpus().length
 }
 
-export const opencvRepoUrl = 'http://localhost:7100/opencv/opencv.git'
-export const opencvContribRepoUrl = 'http://localhost:7100/opencv/opencv_contrib.git'
-export const opencv3rdPartyRepoUrl = 'http://localhost:7100/opencv/opencv_3rdparty.git'
+export const repoBaseUrl = 'http://192.168.68.254:7100'
+export const opencvRepoUrl = `${repoBaseUrl}/opencv/opencv.git`
+export const opencvContribRepoUrl = `${repoBaseUrl}/opencv/opencv_contrib.git`
+export const opencv3rdPartyRepoUrl = `${repoBaseUrl}/opencv/opencv_3rdparty.git`
 
 export const opencvModules = [
   'core',

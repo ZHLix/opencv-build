@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'fs'
 import log from 'npmlog'
 import { join } from 'path'
 import { dirs } from './dirs'
-import { defaultCmakeFlags, numberOfCoresAvailable, opencvContribRepoUrl, opencvRepoUrl, version } from './env'
+import { defaultCmakeFlags, numberOfCoresAvailable, opencvContribRepoUrl, opencvRepoUrl, repoBaseUrl, version } from './env'
 import { execCmd, getLibs, isWin } from './tools'
 import { AutoBuildFile } from './types'
 
@@ -60,7 +60,7 @@ async function updateOpencvRawDownloadPath() {
     let content = readFileSync(v, { encoding: 'utf-8' })
     content = content
       //
-      .replace(/https:\/\/raw.githubusercontent.com\/opencv\/opencv_3rdparty\//g, 'http://localhost:7100/opencv/opencv_3rdparty/raw/')
+      .replace(/https:\/\/raw.githubusercontent.com\/opencv\/opencv_3rdparty\//g, `${repoBaseUrl}/opencv/opencv_3rdparty/raw/`)
 
     writeFileSync(v, content)
   })

@@ -14,6 +14,7 @@
     "build": "rimraf dist types && npm run build:main && npm run build:dts",
     "build:main": "rollup -c",
     "build:dts": "api-extractor run",
+    "prepublishOnly": "npm run build",
     "test": "npm run build:main && node dist/bin.js"
   },
   "devDependencies": {
