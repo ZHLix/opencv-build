@@ -1,7 +1,6 @@
 {
   "name": "@zhlix/opencv-build",
-  "version": "0.2.1",
-  "main": "dist/index.js",
+  "version": "0.2.2",
   "author": "zlx",
   "license": "MIT",
   "bin": {
@@ -10,6 +9,8 @@
   "files": [
     "dist"
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "rimraf dist types && npm run build:main && npm run build:dts",
     "build:main": "rollup -c",
