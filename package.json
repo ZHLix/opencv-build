@@ -1,0 +1,31 @@
+{
+  "name": "@zhlix/opencv-build",
+  "version": "3.4.6",
+  "main": "dist/index.js",
+  "author": "zlx",
+  "license": "MIT",
+  "bin": {
+    "opencv-build": "dist/bin.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist types && npm run build:main && npm run build:dts",
+    "build:main": "rollup -c",
+    "build:dts": "api-extractor run",
+    "test": "npm run build:main && node dist/bin.js"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.31.1",
+    "@types/node": "16",
+    "@types/npmlog": "^4.1.4",
+    "npmlog": "^6.0.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.79.0",
+    "rollup-plugin-shebang-bin": "^0.0.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.34.0",
+    "typescript": "^4.8.3"
+  }
+}
