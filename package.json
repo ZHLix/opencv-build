@@ -1,6 +1,6 @@
 {
   "name": "@zhlix/opencv-build",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "author": "zlx",
   "license": "MIT",
@@ -17,21 +17,21 @@
     "prepublishOnly": "npm run build",
     "test": "npm run build:main && node dist/bin.js"
   },
+  "dependencies": {
+    "npmlog": "^6.0.2",
+    "picocolors": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "tiny-glob": "^0.2.9"
+  },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.31.1",
     "@types/node": "16",
     "@types/npmlog": "^4.1.4",
     "@types/rimraf": "^3.0.2",
-    "rimraf": "^3.0.2",
     "rollup": "^2.79.0",
     "rollup-plugin-shebang-bin": "^0.0.4",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.34.0",
     "typescript": "^4.8.3"
-  },
-  "dependencies": {
-    "npmlog": "^6.0.2",
-    "picocolors": "^1.0.0",
-    "tiny-glob": "^0.2.9"
   }
 }
