@@ -1,4 +1,4 @@
-import fs, { readFileSync, writeFileSync } from 'fs'
+import fs, { existsSync, readFileSync, writeFileSync } from 'fs'
 import { EOL } from 'os'
 import { OpenCVBuilder } from './OpenCVBuilder'
 import { findMsBuild, pathVersion } from './findMsBuild'
@@ -121,12 +121,15 @@ export class SetupOpencv {
       env.opencvRoot + '/opencv_contrib/modules/face/CMakeLists.txt',
       env.opencvRoot + '/opencv_contrib/modules/xfeatures2d/cmake/download_boostdesc.cmake',
       env.opencvRoot + '/opencv_contrib/modules/xfeatures2d/cmake/download_vgg.cmake',
+      env.opencvRoot + '/opencv/modules/gapi/cmake/DownloadADE.cmake',
     ]
     files.forEach(v => {
+      if (!existsSync(v)) return
       let content = readFileSync(v, { encoding: 'utf-8' })
       content = content
         //
         .replace(/https:\/\/raw.githubusercontent.com\/opencv\/opencv_3rdparty\//g, `${this.builder.constant.repoBaseUrl}/opencv/opencv_3rdparty/raw/`)
+        .replace(/https:\/\/github.com\//g, `${this.builder.constant.repoBaseUrl}/`)
 
       writeFileSync(v, content)
     })

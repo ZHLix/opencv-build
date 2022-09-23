@@ -1,6 +1,5 @@
 dist
 node_modules
-opencv
-opencv-*
+build
 types
 pnpm-lock.yaml

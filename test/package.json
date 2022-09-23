@@ -1,0 +1,10 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "@zhlix/opencv-build": "link:.."
+  }
+}

@@ -18,6 +18,7 @@ import {
 } from './misc'
 import { ALL_OPENCV_MODULES } from '.'
 import blob from 'tiny-glob/sync'
+import { version } from '../package.json'
 
 export default class OpenCVBuildEnv implements OpenCVBuildEnvParamsBool, OpenCVBuildEnvParamsString {
   public prebuild?: 'latestBuild' | 'latestVersion' | 'oldestBuild' | 'oldestVersion'
@@ -74,11 +75,11 @@ export default class OpenCVBuildEnv implements OpenCVBuildEnvParamsBool, OpenCVB
   #packageEnv: OpenCVPackageBuildOptions = {}
 
   constructor(private opts = {} as OpenCVBuildEnvParams) {
-    const DEFAULT_OPENCV_VERSION = '4.5.5'
+    const DEFAULT_OPENCV_VERSION = version // '4.5.5'
     this.prebuild = opts.prebuild
     this._platform = process.platform
     this.packageRoot = opts.rootcwd || process.env.INIT_CWD || process.cwd()
-    this.buildRoot = opts.buildRoot || process.env.OPENCV_BUILD_ROOT || path.join(__dirname, '..')
+    this.buildRoot = opts.buildRoot || process.env.OPENCV_BUILD_ROOT || path.join(__dirname, '../build/opencv')
     if (this.buildRoot[0] === '~') {
       this.buildRoot = path.join(os.homedir(), this.buildRoot.slice(1))
     }
@@ -456,7 +457,8 @@ export default class OpenCVBuildEnv implements OpenCVBuildEnvParamsBool, OpenCVB
     return this.buildRoot
   }
   public get opencvRoot(): string {
-    return path.join(this.rootDir, `opencv-${this.opencvVersion}${this.optHash}`)
+    return this.rootDir
+    // return path.join(this.rootDir, `opencv-${this.opencvVersion}${this.optHash}`)
   }
 
   public get opencvGitCache(): string {
