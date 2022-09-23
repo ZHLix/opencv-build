@@ -3,7 +3,7 @@ type: docker
 name: default
 
 platform:
-  os: darwin
+  os: linux
   arсh: amd64
 
 steps:
