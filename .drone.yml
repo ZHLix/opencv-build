@@ -1,0 +1,40 @@
+kind: pipeline
+type: docker
+name: default
+
+platform:
+  os: darwin
+  arсh: amd64
+
+steps:
+  - name: build
+    image: node:14
+    depends_on:
+      - clone
+    environment:
+      REGISTRY:
+        from_secret: npm-registry
+      TOKEN:
+        from_secret: npm-token
+    commands: # 当前步骤执行的命令
+      - pwd # 查看当前目录
+      - npm config set registry $REGISTRY # 切换淘宝镜像
+      - npm config set $TOKEN
+      - sed -i -e 's/deb.debian.org/mirrors.huaweicloud.com/g' -e 's/security.debian.org/mirrors.huaweicloud.com/g' /etc/apt/sources.list
+      - apt update
+      - apt install cmake -y
+      - npm install # 安装node_modules包
+      - yarn prepublishOnly
+      - npm run install # 执行编译
+      - npm run package
+      # - rm -fr ./blog
+      - ls /drone/src
+
+  - name: gitea_release
+    image: plugins/gitea-release
+    settings:
+      api_key:
+        from_secret: gitea-token
+      insecure: true
+      base_url: https://192.168.68.254:7100
+      files: build/stage/*/*
