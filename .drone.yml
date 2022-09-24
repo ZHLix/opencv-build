@@ -1,0 +1,83 @@
+---
+kind: pipeline
+name: node14
+platform:
+  arch: amd64
+  os: linux
+  version: ''
+steps:
+  - commands:
+      - npm config set registry $REGISTRY
+      - npm config set $TOKEN
+      - sed -i -e 's/deb.debian.org/mirrors.huaweicloud.com/g' -e
+        's/security.debian.org/mirrors.huaweicloud.com/g'
+        /etc/apt/sources.list
+      - apt update
+      - apt install cmake -y
+      - npm install
+      - yarn prepublishOnly
+      - npm run install
+      - npm run package
+    environment:
+      REGISTRY:
+        from_secret: npm-registry
+      TOKEN:
+        from_secret: npm-token
+    image: node:14
+    name: build
+  - depends_on:
+      - build
+    image: plugins/gitea-release
+    name: gitea_release
+    settings:
+      api_key:
+        from_secret: gitea-token
+      base_url: https://192.168.68.254:7100
+      files: build/state/*/*
+      insecure: true
+trigger:
+  event:
+    - tag
+type: docker
+
+---
+kind: pipeline
+name: node16
+platform:
+  arch: amd64
+  os: linux
+  version: ''
+steps:
+  - commands:
+      - npm config set registry $REGISTRY
+      - npm config set $TOKEN
+      - sed -i -e 's/deb.debian.org/mirrors.huaweicloud.com/g' -e
+        's/security.debian.org/mirrors.huaweicloud.com/g'
+        /etc/apt/sources.list
+      - apt update
+      - apt install cmake -y
+      - npm install
+      - yarn prepublishOnly
+      - npm run install
+      - npm run package
+    environment:
+      REGISTRY:
+        from_secret: npm-registry
+      TOKEN:
+        from_secret: npm-token
+    image: node:16
+    name: build
+  - depends_on:
+      - build
+    image: plugins/gitea-release
+    name: gitea_release
+    settings:
+      api_key:
+        from_secret: gitea-token
+      base_url: https://192.168.68.254:7100
+      files: build/state/*/*
+      insecure: true
+trigger:
+  event:
+    - tag
+type: docker
