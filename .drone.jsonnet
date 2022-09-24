@@ -1,5 +1,5 @@
 local Platform(name='linux') = {
-  local map = {
+  local platformMap = {
     linux: {
       os: 'linux',
       arch: 'amd64',
@@ -14,9 +14,9 @@ local Platform(name='linux') = {
       arch: 'amd64',
     },
   },
-  os: map[name].os,
-  arch: map[name].arch,
-  version: if name == 'windows' then map[name].version else '',
+  os: platformMap[name].os,
+  arch: platformMap[name].arch,
+  version: if name == 'windows' then platformMap[name].version else '',
 };
 
 local Pipeline(name, type='docker', platform='linux', image) = {
