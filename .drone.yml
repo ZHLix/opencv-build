@@ -23,7 +23,7 @@ steps:
       - sed -i -e 's/deb.debian.org/mirrors.huaweicloud.com/g' -e 's/security.debian.org/mirrors.huaweicloud.com/g' /etc/apt/sources.list
       - apt update
       - apt install cmake -y
-      - npm install # 安装node_modules包
+      - npm install --ignore-scripts # 安装node_modules包
       - yarn prepublishOnly
       - mkdir -p build/opencv
       - touch build/opencv/auto-build.json
