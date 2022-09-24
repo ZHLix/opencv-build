@@ -20,14 +20,12 @@ steps:
       # - pwd # 查看当前目录
       - npm config set registry $REGISTRY # 切换淘宝镜像
       - npm config set $TOKEN
-      # - sed -i -e 's/deb.debian.org/mirrors.huaweicloud.com/g' -e 's/security.debian.org/mirrors.huaweicloud.com/g' /etc/apt/sources.list
-      # - apt update
-      # - apt install cmake -y
+      - sed -i -e 's/deb.debian.org/mirrors.huaweicloud.com/g' -e 's/security.debian.org/mirrors.huaweicloud.com/g' /etc/apt/sources.list
+      - apt update
+      - apt install cmake -y
       - npm install --ignore-scripts # 安装node_modules包
       - yarn prepublishOnly
-      - mkdir -p build/opencv
-      - touch build/opencv/auto-build.json
-      # - npm run install # 执行编译
+      - npm run install # 执行编译
       - npm run package
 
   - name: gitea_release

@@ -1,29 +1,23 @@
-local Platform(name='linux') = {
-  local platformMap = {
-    linux: {
-      os: 'linux',
-      arch: 'amd64',
-    },
-    windows: {
-      os: 'windows',
-      arch: 'amd64',
-      version: '1903',
-    },
-    darwin: {
-      os: 'darwin',
-      arch: 'amd64',
-    },
-  },
-  os: platformMap[name].os,
-  arch: platformMap[name].arch,
-  version: if name == 'windows' then platformMap[name].version else '',
+local PlaformWithLinux = {
+  os: 'linux',
+  arch: 'amd64',
+};
+local PlaformWithMacOS = {
+  os: 'darwin',
+  arch: 'amd64',
+};
+local PlaformWithWindows = {
+  os: 'windows',
+  arch: 'amd64',
+  version: '1903',
 };
 
 local Pipeline(name, type='docker', platform='linux', image) = {
+  local platform_1 = if platform == 'darwin' then PlaformWithMacOS else if platform == 'windows' then PlaformWithWindows else PlaformWithLinux,
   kind: 'pipeline',
   name: name,
   type: type,
-  platform: Platform(platform),
+  platform: platform_1,
   steps: [
     {
       name: 'build',
@@ -43,8 +37,6 @@ local Pipeline(name, type='docker', platform='linux', image) = {
         'apt update',
         'apt install cmake -y',
         'npm install',  // 安装node_modules包
-        'yarn prepublishOnly',
-        'npm run install',  // 执行编译
         'npm run package',
       ],
     },
@@ -57,7 +49,7 @@ local Pipeline(name, type='docker', platform='linux', image) = {
           from_secret: 'gitea-token',
         },
         insecure: true,
-        base_url: 'https://192.168.68.254:7100',
+        base_url: 'http://192.168.68.254:7100',
         files: 'build/state/*/*',
       },
     },
@@ -70,6 +62,6 @@ local Pipeline(name, type='docker', platform='linux', image) = {
 };
 
 [
-  Pipeline('node14', 'docker', 'linux', 'node:14'),
+  Pipeline('node16', 'docker', 'windows', 'node:16'),
   Pipeline('node16', 'docker', 'linux', 'node:16'),
 ]
