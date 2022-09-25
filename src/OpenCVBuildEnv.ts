@@ -232,6 +232,7 @@ export default class OpenCVBuildEnv implements OpenCVBuildEnvParamsBool, OpenCVB
       // ensure that OpenCV workdir exists
       if (!fs.existsSync(this.buildRoot)) {
         fs.mkdirSync(this.buildRoot, { recursive: true })
+
         if (!fs.existsSync(this.buildRoot)) {
           throw new Error(`${this.buildRoot} can not be create`)
         }
