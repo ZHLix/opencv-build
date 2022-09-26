@@ -33,5 +33,4 @@ jobs:
       
       - name: msbuild Test
         run: |
-          where
           where msbuild
