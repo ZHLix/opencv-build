@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14, 16]
+        node-version: [14]
         os: [windows-latest]
     # The type of runner that the job will run on
     
@@ -32,5 +32,4 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: msbuild Test
-        run: |
-          where msbuild
+        run: ls C:\Program Files (x86)\Microsoft Visual Studio\
