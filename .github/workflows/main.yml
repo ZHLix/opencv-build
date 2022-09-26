@@ -43,7 +43,7 @@ jobs:
           
       - name: Show Directory | Files
         run: |
-          ls build/stage/v${{ needs.release.outputs.version }}/
+          ls build/stage/v0.0.1/
           
       - name: 建立GitHub Release & 上传附件
         uses: meeDamian/github-release@2.0
