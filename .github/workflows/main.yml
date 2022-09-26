@@ -63,7 +63,9 @@ jobs:
 
       - name: Generate Assets
         run: |
-          mkdir -pv build/stage/v0.0.1
+          mkdir build
+          mkdir build/stage
+          mkdir build/stage/v0.0.1
           echo 'this is tset' > build/stage/v0.0.1/license
           
       - name: Show Directory | Files
