@@ -33,9 +33,9 @@ jobs:
         uses: actions/create-release@latest
         with:
           # 标签名
-          tag_name: v${{needs.release.outputs.version}}
+          tag_name: v0.0.1
           # release名
-          release_name: v${{needs.release.outputs.version}}
+          release_name: v0.0.1
           # 是否为草稿
           draft: false
           # 是否为预发布
