@@ -40,11 +40,6 @@ jobs:
         run: |
           mkdir -pv build/stage/v0.0.1/
           touch build/stage/v0.0.1/license
-          
-      - name: Echo Accent Token
-        run: |
-          echo ${{ secrets.GITHUB_TOKEN }}
-          echo ${{ secrets.ACCESS_TOKEN }}
 
       # 读取当前版本号
       - name: 读取当前版本号
@@ -57,7 +52,7 @@ jobs:
 
       - name: 建立GitHub Release & 上传附件
         uses: meeDamian/github-release@2.0
-        env:
+        with:
           # 配置github token （这个无需去github配置，默认存在的）
           token: ${{ secrets.GITHUB_TOKEN }}
           # 标签名
