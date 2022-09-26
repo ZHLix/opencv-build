@@ -40,6 +40,11 @@ jobs:
         run: |
           mkdir -pv build/stage/v0.0.1/
           touch build/stage/v0.0.1/license
+          
+      - name: Echo Accent Token
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }}
+          echo ${{ secrets.ACCENT_TOKEN }}
 
       # 读取当前版本号
       - name: 读取当前版本号
