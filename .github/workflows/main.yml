@@ -81,4 +81,4 @@ jobs:
           # 上传URL为建立GitHub Release步骤的输出值，可经过配置的id获取
           # upload_url: ${{ steps.create_release.outputs.upload_url }}
           # 上传文件信息
-          asset_paths: '["./build/stage/*/*"]'
+          asset_paths: '["build/stage/v${needs.release.outputs.version}/*"]'
