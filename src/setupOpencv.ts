@@ -31,14 +31,14 @@ export class SetupOpencv {
       this.execLog.push(args)
       if (!env.dryRun) {
         log.info('install', 'spawning in %s: %s', env.opencvBuild, args)
-        await spawn(`${msbuildExe}`, buildSLN, { cwd: env.opencvBuild })
+        await spawn(`${msbuildExe}`, buildSLN, { cwd: env.opencvBuild, shell: env.isWin as any })
       }
       const buildVcxproj = this.getMsbuildCmd('./INSTALL.vcxproj')
       args = toExecCmd(msbuildExe, buildVcxproj)
       this.execLog.push(`${args}`)
       if (!env.dryRun) {
         log.info('install', 'spawning in %s: %s', env.opencvBuild, args)
-        await spawn(`${msbuildExe}`, buildVcxproj, { cwd: env.opencvBuild })
+        await spawn(`${msbuildExe}`, buildVcxproj, { cwd: env.opencvBuild, shell: env.isWin as any })
       }
     } else {
       this.execLog.push(`cd ${protect(env.opencvBuild)}`)
@@ -46,7 +46,7 @@ export class SetupOpencv {
 
       if (!env.dryRun) {
         log.info('install', 'spawning in %s: make', env.opencvBuild)
-        await spawn('make', ['install', `-j${env.numberOfCoresAvailable()}`], { cwd: env.opencvBuild })
+        await spawn('make', ['install', `-j${env.numberOfCoresAvailable()}`], { cwd: env.opencvBuild, shell: env.isWin as any })
       }
 
       this.execLog.push(`make all -j${env.numberOfCoresAvailable()}`)
@@ -189,9 +189,9 @@ export class SetupOpencv {
         if (this.builder.env.gitCache) {
           if (!fs.existsSync(this.builder.env.opencvContribGitCache)) {
             const args = ['clone', '--quiet', '--progress', opencvContribRepoUrl, this.builder.env.opencvContribGitCache]
-            await spawn('git', args, { cwd: env.opencvRoot }, { err: gitFilter })
+            await spawn('git', args, { cwd: env.opencvRoot, shell: env.isWin as any }, { err: gitFilter })
           } else {
-            await spawn('git', ['pull'], { cwd: env.opencvContribGitCache }, { err: gitFilter })
+            await spawn('git', ['pull'], { cwd: env.opencvContribGitCache, shell: env.isWin as any }, { err: gitFilter })
           }
           opencvContribRepoUrl = env.opencvContribGitCache.replace(/\\/g, '/')
         }
@@ -199,16 +199,16 @@ export class SetupOpencv {
         const args = ['clone', '--quiet', '-b', `${tag}`, '--single-branch', '--depth', '1', '--progress', opencvContribRepoUrl, env.opencvContribSrc]
         this.execLog.push(toExecCmd('cd', [env.opencvRoot]))
         this.execLog.push(toExecCmd('git', args))
-        await spawn('git', args, { cwd: env.opencvRoot }, { err: gitFilter })
+        await spawn('git', args, { cwd: env.opencvRoot, shell: env.isWin as any }, { err: gitFilter })
       }
       let opencvRepoUrl = this.builder.constant.opencvRepoUrl
 
       if (this.builder.env.gitCache) {
         if (!fs.existsSync(this.builder.env.opencvGitCache)) {
           const args = ['clone', '--quiet', '--progress', opencvRepoUrl, this.builder.env.opencvGitCache]
-          await spawn('git', args, { cwd: env.opencvRoot }, { err: gitFilter })
+          await spawn('git', args, { cwd: env.opencvRoot, shell: env.isWin as any }, { err: gitFilter })
         } else {
-          await spawn('git', ['pull'], { cwd: env.opencvGitCache }, { err: gitFilter })
+          await spawn('git', ['pull'], { cwd: env.opencvGitCache, shell: env.isWin as any }, { err: gitFilter })
         }
         opencvRepoUrl = env.opencvGitCache.replace(/\\/g, '/')
       }
@@ -216,7 +216,7 @@ export class SetupOpencv {
       log.info('install', `git clone ${opencvRepoUrl}`)
       const args2 = ['clone', '--quiet', '-b', `${tag}`, '--single-branch', '--depth', '1', '--progress', opencvRepoUrl, env.opencvSrc]
       this.execLog.push(toExecCmd('git', args2))
-      await spawn('git', args2, { cwd: env.opencvRoot }, { err: gitFilter })
+      await spawn('git', args2, { cwd: env.opencvRoot, shell: env.isWin as any }, { err: gitFilter })
 
       // await this.updateOpencvRawDownloadPath()
 
@@ -229,7 +229,7 @@ export class SetupOpencv {
       this.execLog.push(toExecCmd('cd', [env.opencvBuild]))
       this.execLog.push(toExecCmd('cmake', cmakeArgs))
       if (!env.dryRun) {
-        await spawn('cmake', cmakeArgs, { cwd: env.opencvBuild })
+        await spawn('cmake', cmakeArgs, { cwd: env.opencvBuild , shell: env.isWin as any})
         log.info('install', 'starting build...')
       }
       await this.runBuildCmd(msbuildPath)
