@@ -459,6 +459,7 @@ class SetupOpencv {
             this.execLog.push(`export OPENCV_BIN_DIR=${utils.protect(env.opencvBinDir)}`);
             this.execLog.push(`export OPENCV_INCLUDE_DIR=${utils.protect(env.opencvIncludeDir)}`);
             this.execLog.push(`export OPENCV_LIB_DIR=${utils.protect(env.opencvLibDir)}`);
+            return;
             const cmakeArgs = this.getCmakeArgs(cMakeFlags);
             log__default["default"].info('install', 'running in %s cmake %s', utils.protect(env.opencvBuild), cmakeArgs.map(utils.protect).join(' '));
             this.execLog.push(utils.toExecCmd('cd', [env.opencvBuild]));
@@ -533,7 +534,7 @@ class Constant {
         '16': 'Visual Studio 16 2019',
         '17': 'Visual Studio 17 2022',
     };
-    cmakeArchs = { x64: 'x64', ia32: '', arm: 'ARM' };
+    cmakeArchs = { x64: 'Win64', ia32: '', arm: 'ARM' };
 }
 
 var version = "4.5.5";

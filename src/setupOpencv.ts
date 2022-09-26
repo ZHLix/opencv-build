@@ -224,6 +224,7 @@ export class SetupOpencv {
       this.execLog.push(`export OPENCV_INCLUDE_DIR=${protect(env.opencvIncludeDir)}`)
       this.execLog.push(`export OPENCV_LIB_DIR=${protect(env.opencvLibDir)}`)
 
+      return
       const cmakeArgs = this.getCmakeArgs(cMakeFlags)
       log.info('install', 'running in %s cmake %s', protect(env.opencvBuild), cmakeArgs.map(protect).join(' '))
       this.execLog.push(toExecCmd('cd', [env.opencvBuild]))
