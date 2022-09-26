@@ -23,9 +23,9 @@ jobs:
       - name: Checkout Git Source
         uses: actions/checkout@v3
 
-      - name: Windows Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.2
-        if: ${{ matrix.os }} == 'windows-2019'
+      # - name: Windows Setup MSBuild
+      #   uses: microsoft/setup-msbuild@v1.0.2
+      #   if: ${{ matrix.os }} == 'windows-2019'
 
       - name: Work with NodejS
         uses: actions/setup-node@v3
