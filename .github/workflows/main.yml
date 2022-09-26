@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-node@v3
       
       - name: Initialize Project
-      - run: yarn init -y
+        run: yarn init -y
 
       # Runs a single command using the runners shell
       - name: Test File
