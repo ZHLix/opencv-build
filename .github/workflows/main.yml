@@ -54,7 +54,7 @@ jobs:
         uses: meeDamian/github-release@2.0
         env:
           # 配置github token （这个无需去github配置，默认存在的）
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           # 标签名
           tag: v${{steps.version.outputs.value}}
           # release名
