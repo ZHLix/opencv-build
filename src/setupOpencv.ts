@@ -71,7 +71,7 @@ export class SetupOpencv {
 
     let GFlag: string[] = []
     if (Number(msversion) <= 15) GFlag = ['-G', `${cmakeVsCompiler} ${cmakeArch}`]
-    else GFlag = ['-G', `${cmakeVsCompiler}`, `-A" ${cmakeArch}"`]
+    else GFlag = ['-G', `${cmakeVsCompiler}`, '-A', cmakeArch]
     return GFlag.concat(this.builder.env.getSharedCmakeFlags())
   }
 
