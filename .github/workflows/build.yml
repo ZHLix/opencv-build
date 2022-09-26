@@ -2,9 +2,7 @@ name: OpencvBuild CI With Linux
 
 on:
   push:
-    branches:
-      - master
-      - fork/@u4_opencv-build
+    branches: ['master', 'fork/@u4_opencv-build']
 
 jobs:
   build:
@@ -44,6 +42,7 @@ jobs:
         run: npm run package
 
   release:
+    runs-on: ubuntu-latest
     env:
       # 配置github token （这个无需去github配置，默认存在的）
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
