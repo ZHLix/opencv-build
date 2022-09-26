@@ -15,7 +15,7 @@
     "build": "rimraf dist types && npm run build:main && npm run build:dts",
     "build:main": "rollup -c",
     "build:dts": "api-extractor run",
-    "package": "node-pre-gyp package",
+    "package": "node dist/clean-useless.js && node-pre-gyp package",
     "prepublishOnly": "npm run build",
     "install": "node dist/run-build.js",
     "test": "npm run build:main && node dist/bin.js"
@@ -23,12 +23,12 @@
   "binary": {
     "module_name": "opencv-build",
     "module_path": "build/opencv",
-    "host": "http://192.168.68.254:7100/development/opencv-build/releases/download/",
+    "host": "https://github.com/ZHLix/opencv-build/releases/download/",
     "remote_path": "v{version}",
     "package_name": "{module_name}-v{version}-{platform}.tar.gz"
   },
   "dependencies": {
-    "@zhlix/node-pre-gyp": "^1.0.11",
+    "@mapbox/node-pre-gyp": "^1.0.10",
     "npmlog": "^6.0.2",
     "picocolors": "^1.0.0",
     "rimraf": "^3.0.2",
