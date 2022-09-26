@@ -23,9 +23,11 @@ jobs:
       - name: Checkout Git Source
         uses: actions/checkout@v3
 
-      # - name: Windows Setup MSBuild
-      #   uses: microsoft/setup-msbuild@v1.0.2
-      #   if: ${{ matrix.os }} == 'windows-2019'
+      - name: Windows Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+        if: ${{ matrix.os }} == 'windows-2019'
+        with:
+          msbuild-architecture: x64
 
       - name: Work with NodejS
         uses: actions/setup-node@v3
@@ -59,7 +61,6 @@ jobs:
           # upload_url: ${{ steps.create_release.outputs.upload_url }}
           # 上传文件信息
           asset_paths: '["./build/stage/*/*"]'
-
 
   release:
     runs-on: ubuntu-latest
