@@ -29,6 +29,9 @@ jobs:
         with:
           msbuild-architecture: x64
 
+      - name: MSBuild Path
+        run: where msbuild
+
       - name: Work with NodejS
         uses: actions/setup-node@v3
         with:
