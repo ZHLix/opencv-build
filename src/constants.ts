@@ -27,5 +27,5 @@ export class Constant {
     '16': 'Visual Studio 16 2019',
     '17': 'Visual Studio 17 2022',
   }
-  cmakeArchs: { [arch: string]: string } = { x64: ' Win64', ia32: '', arm: ' ARM' }
+  cmakeArchs: { [arch: string]: string } = { x64: 'Win64', ia32: '', arm: 'ARM' }
 }
