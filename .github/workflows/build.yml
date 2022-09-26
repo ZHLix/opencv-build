@@ -24,7 +24,7 @@ jobs:
 
       - name: Windows Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
-        if: ${{ matrix.os }} == 'windows-2019'
+        if: matrix.os == 'windows-2019'
         with:
           msbuild-architecture: x64
 
