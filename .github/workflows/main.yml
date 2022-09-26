@@ -78,6 +78,7 @@ jobs:
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: v${{ needs.release.outputs.version }}
           # 上传URL为建立GitHub Release步骤的输出值，可经过配置的id获取
           # upload_url: ${{ steps.create_release.outputs.upload_url }}
           # 上传文件信息
