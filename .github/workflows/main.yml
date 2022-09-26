@@ -50,6 +50,7 @@ jobs:
         os: [windows-2019]
     # The type of runner that the job will run on
     
+    needs: release
     runs-on: ${{ matrix.os }}
 
     env:
