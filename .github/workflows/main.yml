@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [14]
-        os: [windows-latest]
+        os: [windows-2019]
     # The type of runner that the job will run on
     
     runs-on: ${{ matrix.os }}
@@ -30,6 +30,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      - name: Windows Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+        if: ${{ matrix.os }} == 'windows-2019'
+        with:
+          msbuild-architecture: x64
       
       - name: msbuild Test
         run: ls "C:\Program Files (x86)\Microsoft Visual Studio\"
