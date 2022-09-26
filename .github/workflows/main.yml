@@ -44,7 +44,7 @@ jobs:
       - name: Echo Accent Token
         run: |
           echo ${{ secrets.GITHUB_TOKEN }}
-          echo ${{ secrets.ACCENT_TOKEN }}
+          echo ${{ secrets.ACCESS_TOKEN }}
 
       # 读取当前版本号
       - name: 读取当前版本号
@@ -59,7 +59,7 @@ jobs:
         uses: meeDamian/github-release@2.0
         env:
           # 配置github token （这个无需去github配置，默认存在的）
-          token: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           # 标签名
           tag: v${{steps.version.outputs.value}}
           # release名
