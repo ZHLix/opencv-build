@@ -29,9 +29,6 @@ jobs:
         with:
           msbuild-architecture: x64
 
-      - name: MSBuild Path
-        run: where msbuild
-
       - name: Work with NodejS
         uses: actions/setup-node@v3
         with:
@@ -45,9 +42,6 @@ jobs:
 
       - name: Install Dependencies
         run: npm install --ignore-scripts
-
-      - name: Build Dist
-        run: npm run prepublishOnly
 
       - name: Build
         run: npm run install
