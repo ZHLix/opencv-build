@@ -28,11 +28,7 @@ jobs:
       # 读取当前版本号
       - name: 读取当前版本号
         id: version
-        uses: ashley-taylor/read-json-property-action@v1.0
-        with:
-          # 读取dist/package.json的，而不是根路径下的package.json
-          path: ./package.json
-          property: version
+        run: echo 0.0.1
 
       - name: 建立GitHub Release
         id: create_release
