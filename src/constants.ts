@@ -4,8 +4,8 @@ import { OpenCVBuilder } from "./OpenCVBuilder"
 export class Constant {
   constructor(private readonly builder: OpenCVBuilder) {}
 
-  // repoBaseUrl = 'http://192.168.68.254:7100'
-  repoBaseUrl = 'https://github.com'
+  repoBaseUrl = 'http://192.168.68.254:7100'
+  // repoBaseUrl = 'https://github.com'
   opencvRepoUrl = `${this.repoBaseUrl}/opencv/opencv.git`
   opencvContribRepoUrl = `${this.repoBaseUrl}/opencv/opencv_contrib.git`
   opencv3rdPartyRepoUrl = `${this.repoBaseUrl}/opencv/opencv_3rdparty.git`
