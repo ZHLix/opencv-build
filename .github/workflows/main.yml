@@ -6,12 +6,47 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      # 配置github token （这个无需去github配置，默认存在的）
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    outputs:
+      version: steps.version.outputs.value
+
+    steps:
+      - name: Checkout Git Source
+        uses: actions/checkout@v3
+
+      # 读取当前版本号
+      - name: 读取当前版本号
+        id: version
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          # 读取dist/package.json的，而不是根路径下的package.json
+          path: ./package.json
+          property: version
+
+      - name: 建立GitHub Release
+        id: create_release
+        uses: actions/create-release@latest
+        with:
+          # 标签名
+          tag_name: v${{steps.version.outputs.value}}
+          # release名
+          release_name: v${{steps.version.outputs.value}}
+          # 是否为草稿
+          draft: false
+          # 是否为预发布
+          prerelease: false
+
   # This workflow contains a single job called "build"
   build:
     strategy:
@@ -21,6 +56,7 @@ jobs:
     # The type of runner that the job will run on
 
     runs-on: ${{ matrix.os }}
+    needs: release
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -31,24 +67,20 @@ jobs:
         run: |
           mkdir build
           mkdir build/stage
-          mkdir build/stage/v0.0.1
-          echo 'this is tset' > build/stage/v0.0.1/license
-          
+          mkdir build/stage/v{{ needs.release.outputs.version }}
+          echo 'this is tset' > build/stage/v{{ needs.release.outputs.version }}/license
+
       - name: Show Directory | Files
         run: |
-          ls build/stage/v0.0.1/
-          
-      - name: 建立GitHub Release & 上传附件
-        uses: meeDamian/github-release@2.0
+          ls build/stage/v{{ needs.release.outputs.version }}/
+
+      # 上传Release Asset
+      - name: 上传Release Asset
+        id: upload-release-asset
+        uses: ZHLix/upload-assets@0.3.0
         with:
-          # 配置github token （这个无需去github配置，默认存在的）
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # 标签名
-          tag: v0.0.1
-          # 是否为草稿
-          draft: false
-          # 是否为预发布
-          prerelease: true
-          allow_override: true
-          # 文件路径
-          files: build/stage/*/*
+          # 上传URL为建立GitHub Release步骤的输出值，可经过配置的id获取
+          # upload_url: ${{ steps.create_release.outputs.upload_url }}
+          # 上传文件信息
+          tag_name: v${{ needs.release.outputs.version }}
+          asset_paths: '["./build/stage/*/*"]'
