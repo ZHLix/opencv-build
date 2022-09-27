@@ -28,7 +28,9 @@ jobs:
       # 读取当前版本号
       - name: 读取当前版本号
         id: version
-        run: echo 0.0.1
+        run: echo "::set-output name=value::0.0.1"
+        shell: bash
+
 
       - name: 建立GitHub Release
         id: create_release
@@ -63,12 +65,12 @@ jobs:
         run: |
           mkdir build
           mkdir build/stage
-          mkdir build/stage/v{{ needs.release.outputs.version }}
-          echo 'this is tset' > build/stage/v{{ needs.release.outputs.version }}/license
+          mkdir build/stage/v${{ needs.release.outputs.version }}
+          echo 'this is tset' > build/stage/v${{ needs.release.outputs.version }}/license
 
       - name: Show Directory | Files
         run: |
-          ls build/stage/v{{ needs.release.outputs.version }}/
+          ls build/stage/v${{ needs.release.outputs.version }}/
 
       # 上传Release Asset
       - name: 上传Release Asset
