@@ -19,7 +19,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     outputs:
-      version: steps.version.outputs.value
+      version: ${{ steps.version.outputs.value }}
 
     steps:
       - name: Checkout Git Source
@@ -30,7 +30,6 @@ jobs:
         id: version
         run: echo "::set-output name=value::0.0.1"
         shell: bash
-
 
       - name: 建立GitHub Release
         id: create_release
