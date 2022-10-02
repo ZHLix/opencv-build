@@ -47,34 +47,32 @@ jobs:
     needs: release
 
     steps:
+      # 检出仓库
       - name: Checkout Git Source
         uses: actions/checkout@v3
 
+      # windows msBuild 相关
       - name: Windows Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
         if: matrix.os == 'windows-2019'
         with:
           msbuild-architecture: x64
 
+      # 添加 NodeJs 环境
       - name: Work with NodejS
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            build
-            node_modules
-          key: node-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
-
+      # 安装依赖
       - name: Install Dependencies
         run: npm install --ignore-scripts
 
+      # 构建
       - name: Build
         run: npm run install
 
+      # 生成发布包
       - name: Generate Package
         run: npm run package
 
@@ -86,8 +84,6 @@ jobs:
           # 配置github token （这个无需去github配置，默认存在的）
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # 上传URL为建立GitHub Release步骤的输出值，可经过配置的id获取
-          # upload_url: ${{ steps.create_release.outputs.upload_url }}
           # 上传文件信息
           tag_name: v${{ needs.release.outputs.version }}
           files: build/stage/*/*

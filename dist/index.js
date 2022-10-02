@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var OpenCVBuilder = require('./OpenCVBuilder-21bdbdf4.js');
+var OpenCVBuilder = require('./OpenCVBuilder-ba3a339b.js');
 require('./utils-9d03e134.js');
 require('child_process');
 require('fs');

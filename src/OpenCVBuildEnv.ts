@@ -337,6 +337,7 @@ export default class OpenCVBuildEnv implements OpenCVBuildEnvParamsBool, OpenCVB
       '-DBUILD_ZLIB=OFF', // https://github.com/opencv/opencv/issues/21389
       '-DCUDA_NVCC_FLAGS=--expt-relaxed-constexpr',
       '-DWITH_VTK=OFF',
+      '-DWITH_OPENEXR=ON',
     ]
     if (!this.isWithoutContrib) cMakeflags.push('-DOPENCV_ENABLE_NONFREE=ON', `-DOPENCV_EXTRA_MODULES_PATH=${this.opencvContribModules}`)
     cMakeflags.push(...this.getCongiguredCmakeFlags())

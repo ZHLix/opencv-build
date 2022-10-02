@@ -862,6 +862,7 @@ class OpenCVBuildEnv {
             '-DBUILD_ZLIB=OFF',
             '-DCUDA_NVCC_FLAGS=--expt-relaxed-constexpr',
             '-DWITH_VTK=OFF',
+            '-DWITH_OPENEXR=ON',
         ];
         if (!this.isWithoutContrib)
             cMakeflags.push('-DOPENCV_ENABLE_NONFREE=ON', `-DOPENCV_EXTRA_MODULES_PATH=${this.opencvContribModules}`);
