@@ -8,7 +8,7 @@ export default defineConfig({
   input: {
     OpenCVBuilder: 'src/OpenCVBuilder.ts',
     'run-build': 'src/run-build.ts',
-    'clean-useless': 'src/clean-useless.ts',
+    'pre-package': 'src/pre-package.ts',
     'get-version': 'src/get-version.ts',
     index: 'src/index.ts',
     bin: 'src/bin.ts',

@@ -5,11 +5,11 @@ var fs = require('fs');
 var log = require('npmlog');
 var path = require('path');
 var os = require('os');
-var blob = require('tiny-glob');
+var glob = require('tiny-glob');
 var rimraf = require('rimraf');
 var util = require('util');
 var crypto = require('crypto');
-var blob$1 = require('tiny-glob/sync');
+var blob = require('tiny-glob/sync');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -17,10 +17,10 @@ var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
 var log__default = /*#__PURE__*/_interopDefaultLegacy(log);
 var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
 var os__default = /*#__PURE__*/_interopDefaultLegacy(os);
-var blob__default = /*#__PURE__*/_interopDefaultLegacy(blob);
+var glob__default = /*#__PURE__*/_interopDefaultLegacy(glob);
 var rimraf__default = /*#__PURE__*/_interopDefaultLegacy(rimraf);
 var crypto__default = /*#__PURE__*/_interopDefaultLegacy(crypto);
-var blob__default$1 = /*#__PURE__*/_interopDefaultLegacy(blob$1);
+var blob__default = /*#__PURE__*/_interopDefaultLegacy(blob);
 
 class getLibsFactory {
     builder;
@@ -121,7 +121,7 @@ async function findMSBuild() {
             try {
                 const cwd = `${progFile.replace(/\\/g, '/')}/Microsoft Visual Studio`;
                 const reg = `*/*/MSBuild/*/Bin/MSBuild.exe`;
-                for (const m of await blob__default["default"](reg, { cwd })) {
+                for (const m of await glob__default["default"](reg, { cwd })) {
                     matches.push(path.join(cwd, m));
                 }
             }
@@ -713,7 +713,7 @@ class OpenCVBuildEnv {
                     }
                 }
                 if (!process.env.OPENCV_LIB_DIR) {
-                    const candidates = blob__default$1["default"]('/usr/lib/*-linux-gnu');
+                    const candidates = blob__default["default"]('/usr/lib/*-linux-gnu');
                     if (candidates.length)
                         process.env.OPENCV_LIB_DIR = candidates[0];
                 }
@@ -726,7 +726,7 @@ class OpenCVBuildEnv {
             }
             else if (os === 'darwin') {
                 // Brew detection
-                const candidates = blob__default$1["default"]('/opt/homebrew/Cellar/opencv/*');
+                const candidates = blob__default["default"]('/opt/homebrew/Cellar/opencv/*');
                 if (candidates.length) {
                     const dir = candidates[0];
                     if (!process.env.OPENCV_BIN_DIR) {

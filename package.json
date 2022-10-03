@@ -15,10 +15,10 @@
     "build": "rimraf dist types && npm run build:main && npm run build:dts",
     "build:main": "rollup -c",
     "build:dts": "api-extractor run",
-    "package": "node dist/clean-useless.js && node-pre-gyp package",
+    "package": "node dist/pre-package.js && node-pre-gyp package",
     "prepublishOnly": "npm run build",
     "install": "node dist/run-build.js",
-    "test": "npm run build:main && node dist/bin.js"
+    "test": "npm run build:main && node dist/pre-package.js"
   },
   "binary": {
     "module_name": "opencv-build",

@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 require('./utils-9d03e134.js');
 require('fs');
 require('npmlog');
-var OpenCVBuilder = require('./OpenCVBuilder-ba3a339b.js');
+var OpenCVBuilder = require('./OpenCVBuilder-fc8dac17.js');
 require('child_process');
 require('os');
 require('path');
