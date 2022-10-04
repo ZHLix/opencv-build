@@ -1013,13 +1013,13 @@ class OpenCVBuildEnv {
         this.getReady();
         if (process.env.OPENCV_LIB_DIR)
             return process.env.OPENCV_LIB_DIR;
-        return this.isWin ? path__default["default"].join(this.opencvBuild, 'lib/Release') : path__default["default"].join(this.opencvBuild, 'lib');
+        return path__default["default"].join(this.opencvBuild, 'lib'); // this.isWin ? path.join(this.opencvBuild, 'lib/Release') : path.join(this.opencvBuild, 'lib')
     }
     get opencvBinDir() {
         this.getReady();
         if (process.env.OPENCV_BIN_DIR)
             return process.env.OPENCV_BIN_DIR;
-        return this.isWin ? path__default["default"].join(this.opencvBuild, 'bin/Release') : path__default["default"].join(this.opencvBuild, 'bin');
+        return path__default["default"].join(this.opencvBuild, 'bin'); // this.isWin ? path.join(this.opencvBuild, 'bin/Release') : path.join(this.opencvBuild, 'bin')
     }
     get autoBuildFile() {
         return path__default["default"].join(this.opencvRoot, 'auto-build.json');

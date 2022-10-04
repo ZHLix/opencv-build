@@ -2,7 +2,7 @@
 
 'use strict';
 
-var OpenCVBuilder = require('./OpenCVBuilder-fc8dac17.js');
+var OpenCVBuilder = require('./OpenCVBuilder-e64fb259.js');
 require('./utils-9d03e134.js');
 require('child_process');
 require('fs');

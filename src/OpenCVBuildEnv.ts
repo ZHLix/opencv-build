@@ -498,12 +498,12 @@ export default class OpenCVBuildEnv implements OpenCVBuildEnvParamsBool, OpenCVB
   public get opencvLibDir(): string {
     this.getReady()
     if (process.env.OPENCV_LIB_DIR) return process.env.OPENCV_LIB_DIR
-    return this.isWin ? path.join(this.opencvBuild, 'lib/Release') : path.join(this.opencvBuild, 'lib')
+    return path.join(this.opencvBuild, 'lib') // this.isWin ? path.join(this.opencvBuild, 'lib/Release') : path.join(this.opencvBuild, 'lib')
   }
   public get opencvBinDir(): string {
     this.getReady()
     if (process.env.OPENCV_BIN_DIR) return process.env.OPENCV_BIN_DIR
-    return this.isWin ? path.join(this.opencvBuild, 'bin/Release') : path.join(this.opencvBuild, 'bin')
+    return path.join(this.opencvBuild, 'bin') // this.isWin ? path.join(this.opencvBuild, 'bin/Release') : path.join(this.opencvBuild, 'bin')
   }
   public get autoBuildFile(): string {
     return path.join(this.opencvRoot, 'auto-build.json')
